@@ -1,0 +1,152 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url('assets/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf');
+        }
+        body {
+            margin: 0;
+            padding:0;
+            font-family: "Roboto", sans-serif;
+        }
+        #container {
+            width: 1910px;
+            height: 1070px;
+            padding: 5px;
+        }
+        .color-club {
+            background-color: #ff9a2a;
+        }
+        .color-halle {
+            background-color: white;
+        }
+        .color-kneipe {
+            background-color: #00ffff;
+        }
+        .color-biergarten {
+            background-color: #009dda;
+        }
+        .color-tanzraum {
+            background-color: #ffff00;
+        }
+        .color-studio {
+            background-color: #ff00c0;
+        }
+        .color-raum4 {
+            background-color: #4cff00;
+        }
+        table {
+            width: 100%;
+            border-spacing: 0;
+        }
+        tr {
+        }
+        th {
+            font-size: 39pt;
+            padding: 8px;
+            background-color: black;
+            color: white;
+            text-align: left;
+        }
+        td {
+            font-size: 40pt;
+            font-weight: 350;
+        }
+        th.event-date {
+            padding-left: 71px;
+            padding-top: 4px;
+            padding-bottom: 14px;
+            letter-spacing: 2px;
+            width: 177px;
+        }
+        th.event-title {
+            padding-top: 4px;
+            padding-bottom: 14px;
+            letter-spacing: 1.5px;
+            width: 177px;
+
+        }
+        th.event-location {
+            padding-top: 4px;
+            padding-bottom: 14px;
+            letter-spacing: 1.5px;
+        }
+        th.event-time {
+            padding-top: 4px;
+            padding-bottom: 14px;
+            letter-spacing: 1.5px;
+        }
+        td.event-date {
+            padding-top: 30px;
+            padding-left: 71px;
+            padding-bottom: 22px;
+        }
+        td.event-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 960px;
+            padding-right: 40px;
+        }
+        .event-location {
+        }
+        .event-time {
+        }
+
+        td {
+            border-bottom: 3px solid #999999;
+        }
+        .copy-huge {
+            font-size: 93pt;
+            letter-spacing: 1px;
+        }
+        .copy-big {
+            font-size: 41pt;
+            padding-left: 13px;
+        }
+        .future {
+            opacity: 50%;
+            font-weight: 200;
+        }
+        .def {
+
+        }
+        .header {
+            padding-left: 76px;
+            padding-top: 38px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div id="container">
+        <table>
+            <tr>
+                <th colspan="4" class="header">
+                    <span class="copy-huge">zakk Veranstaltungen</span>
+                    <span class="copy-big">- folge den farbigen Streifen</span>
+                </th>
+            </tr>
+            <tr>
+                <th class="event-date">Datum</th>
+                <th class="event-title">Veranstaltung</th>
+                <th class="event-location">Ort</th>
+                <th class="event-time">Einlass</th>
+            </tr>
+            {% for date in dates %}
+                {% set myDateStr = date.date|date('Y-m-d') %}
+                {% set todayStr = "now"|date('Y-m-d') %}
+                {% set status = myDateStr > todayStr ? 'future' : (myDateStr == todayStr ? 'today' : 'past') %}
+                <tr class="def color-{{ date.identifier }}">
+                    <td class="event-date {{ status }}">{{ date.date|format_date(pattern:"dd.MM.") }}</td>
+                    <td class="event-title  {{ status }}">{{ date.title }}</td>
+                    <td class="event-location  {{ status }}">{{ date.location }}</td>
+                    <td class="event-time  {{ status }}">{{ date.time }} Uhr</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+{% endblock %}
