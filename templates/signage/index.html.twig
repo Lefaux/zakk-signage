@@ -52,10 +52,10 @@
         }
         td {
             font-size: 40pt;
-            font-weight: 350;
+            font-weight: 500;
         }
         th.event-date {
-            padding-left: 71px;
+            padding-left: 20px;
             padding-top: 4px;
             padding-bottom: 14px;
             letter-spacing: 2px;
@@ -80,7 +80,7 @@
         }
         td.event-date {
             padding-top: 25px;
-            padding-left: 71px;
+            padding-left: 20px;
             padding-bottom: 22px;
         }
         td.event-title {
@@ -107,7 +107,6 @@
             padding-left: 13px;
         }
         .future {
-            opacity: 50%;
             font-weight: 200;
         }
         .def {
@@ -117,6 +116,11 @@
             padding-left: 76px;
             padding-top: 38px;
         }
+        td.boarding {
+            padding: 0;
+            text-align: right;
+            vertical-align: middle;
+        }
     </style>
 {% endblock %}
 
@@ -124,12 +128,13 @@
     <div id="container">
         <table>
             <tr>
-                <th colspan="4" class="header">
+                <th colspan="5" class="header">
                     <span class="copy-huge">zakk Veranstaltungen</span>
                     <span class="copy-big">- folge den farbigen Streifen</span>
                 </th>
             </tr>
             <tr>
+                <th></th>
                 <th class="event-date">Datum</th>
                 <th class="event-title">Veranstaltung</th>
                 <th class="event-location">Ort</th>
@@ -140,10 +145,31 @@
                 {% set todayStr = "now"|date('Y-m-d') %}
                 {% set status = myDateStr > todayStr ? 'future' : (myDateStr == todayStr ? 'today' : 'past') %}
                 <tr class="def color-{{ date.identifier }}">
-                    <td class="event-date {{ status }}">{{ date.date|format_date(pattern:"dd.MM.") }}</td>
-                    <td class="event-title  {{ status }}">{{ date.title }}</td>
-                    <td class="event-location  {{ status }}">{{ date.location }}</td>
-                    <td class="event-time  {{ status }}">{{ date.time }} Uhr</td>
+                    <td class="boarding">
+                        {% if status == "today" %}
+                            <svg width="40" height="90" viewBox="0 0 40 90" xmlns="http://www.w3.org/2000/svg">
+                                <!--<rect height="120" width="120" fill="#ff00ff"></rect>-->
+                                <circle cx="20" cy="30" r="12" fill="green">
+                                    <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite" begin="0s" />
+                                </circle>
+                                <circle cx="20" cy="60" r="12" fill="green">
+                                    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0s" />
+                                </circle>
+                            </svg>
+                        {% endif %}
+                    </td>
+                    <td class="event-date {{ status }}">
+                        {{ date.date|format_date(pattern:"dd.MM.") }}
+                    </td>
+                    <td class="event-title {{ status }}">
+                        {{ date.title }}
+                    </td>
+                    <td class="event-location {{ status }}">
+                        {{ date.location }}
+                    </td>
+                    <td class="event-time {{ status }}">
+                        {{ date.time }} Uhr
+                    </td>
                 </tr>
             {% endfor %}
         </table>
