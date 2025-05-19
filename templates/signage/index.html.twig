@@ -12,8 +12,8 @@
             font-family: "Roboto", sans-serif;
         }
         #container {
-            width: 1910px;
-            height: 1070px;
+            width: 1586px;
+            height: 864px;
             padding: 5px;
         }
         .color-club {
@@ -44,51 +44,36 @@
         tr {
         }
         th {
-            font-size: 39pt;
-            padding: 8px;
+            font-size: 31pt;
             background-color: black;
             color: white;
             text-align: left;
+            height: 68px;
+            padding-left: 20px;
         }
         td {
-            font-size: 40pt;
+            font-size: 32pt;
+            padding-left: 20px;
             font-weight: 800;
         }
         th.event-date {
-            padding-left: 20px;
-            padding-top: 4px;
-            padding-bottom: 14px;
-            letter-spacing: 2px;
-            width: 177px;
+
         }
         th.event-title {
-            padding-top: 4px;
-            padding-bottom: 14px;
-            letter-spacing: 1.5px;
-            width: 177px;
+
 
         }
         th.event-location {
-            padding-top: 4px;
-            padding-bottom: 14px;
-            letter-spacing: 1.5px;
         }
         th.event-time {
-            padding-top: 4px;
-            padding-bottom: 14px;
-            letter-spacing: 1.5px;
         }
         td.event-date {
-            padding-top: 25px;
-            padding-left: 20px;
-            padding-bottom: 22px;
         }
         td.event-title {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 960px;
-            padding-right: 40px;
         }
         .event-location {
         }
@@ -97,13 +82,14 @@
 
         td {
             border-bottom: 2px solid #000;
+            height: 89px;
         }
         .copy-huge {
-            font-size: 93pt;
+            font-size: 74pt;
             letter-spacing: 1px;
         }
         .copy-big {
-            font-size: 41pt;
+            font-size: 32pt;
             padding-left: 13px;
         }
         .future {
@@ -162,6 +148,7 @@
                         {{ date.date|format_date(pattern:"dd.MM.") }}
                     </td>
                     <td class="event-title {{ status }}">
+                        {{ date.title }}
                         {{ date.title }}
                     </td>
                     <td class="event-location {{ status }}">
